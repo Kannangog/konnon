@@ -97,40 +97,6 @@ export function HardwareSection() {
 
         </div>
       </section>
-
-      {/* ── Applications ─────────────────────────────── */}
-      <section className="relative py-32 border-t" style={{ borderColor: BORDER }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-3 gap-6">
-            
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={0} 
-              className="lg:col-span-1 p-8 rounded-2xl border flex flex-col justify-end min-h-[300px]"
-              style={{ borderColor: BORDER, background: `linear-gradient(180deg, ${CARD_BG}, rgba(148,163,184,0.05))` }}>
-              <Zap className="w-8 h-8 mb-auto" style={{ color: ACCENT }} />
-              <h3 className="text-3xl font-bold text-white tracking-tight mb-4">Energy Systems</h3>
-              <p className="text-slate-400 text-base font-light leading-relaxed max-w-sm">Micro-grid controllers, EV infrastructure, and high-voltage embedded monitoring.</p>
-            </motion.div>
-
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={1} 
-              className="lg:col-span-1 p-8 rounded-2xl border flex flex-col justify-end min-h-[300px]"
-              style={{ borderColor: BORDER, background: `linear-gradient(180deg, ${CARD_BG}, rgba(148,163,184,0.05))` }}>
-              <ShieldAlert className="w-8 h-8 mb-auto" style={{ color: ACCENT }} />
-              <h3 className="text-3xl font-bold text-white tracking-tight mb-4">Defense / Aerospace</h3>
-              <p className="text-slate-400 text-base font-light leading-relaxed max-w-sm">Ruggedized compute modules tested against extreme shock, vibration, and thermal envelopes.</p>
-            </motion.div>
-
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={2} 
-              className="lg:col-span-1 p-8 rounded-2xl border flex flex-col justify-end min-h-[300px]"
-              style={{ borderColor: BORDER, background: `linear-gradient(180deg, ${CARD_BG}, rgba(148,163,184,0.05))` }}>
-              <Wifi className="w-8 h-8 mb-auto" style={{ color: ACCENT }} />
-              <h3 className="text-3xl font-bold text-white tracking-tight mb-4">Industrial IoT</h3>
-              <p className="text-slate-400 text-base font-light leading-relaxed max-w-sm">Low-power wide-area sensor networks predicting mechanical failure on the factory floor.</p>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }

@@ -30,7 +30,6 @@ export function Navbar({ mode, setMode }: NavbarProps) {
 
   const pageLinks = [
     { name: "About", href: "/about" },
-    { name: "Innovations", href: "/innovations" },
     { name: "Research", href: "/research" },
     { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/contact" },

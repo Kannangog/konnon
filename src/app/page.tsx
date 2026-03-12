@@ -67,7 +67,6 @@ function HomeContent() {
                   links: [
                     { label: "Ronnon AI", href: "https://ronnon.com" },
                     { label: "Research Lab", href: "/research" },
-                    { label: "Concepts", href: "/innovations" },
                   ],
                 },
                 {

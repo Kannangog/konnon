@@ -24,6 +24,12 @@
       }
     ]
   },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
   "apphosting": {
     "backendId": "konnon-web",
     "rootDir": ".",
@@ -36,3 +42,4 @@
     ]
   }
 }
+

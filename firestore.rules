@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == "kannan7k.rlm@gmail.com";
+    }
+
+    // Jobs: anyone can read, only auth admin can write/delete
+    match /jobs/{jobId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Applications: anyone can create (submit application), admin can read/delete
+    match /applications/{appId} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
+      allow update: if isAdmin();
+    }
+
+    // Messages: anyone can create, admin can read/delete
+    match /messages/{msgId} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
+      allow update: if isAdmin();
+    }
+
+    // Products: anyone can read, admin can write/delete
+    match /products/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Research: anyone can read, admin can write/delete
+    match /research/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Content: anyone can read, admin can write/delete
+    match /content/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
+

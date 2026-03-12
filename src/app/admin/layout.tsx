@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter, usePathname } from "next/navigation";
-import { Loader2, LayoutDashboard, FileText, Package, TestTube, MessageSquare, LogOut } from "lucide-react";
+import { Loader2, LayoutDashboard, FileText, Package, TestTube, MessageSquare, LogOut, Briefcase } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -51,7 +51,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { label: "Dashboard", href: "/admin", icon: <LayoutDashboard className="w-5 h-5" /> },
-    { label: "Content Content", href: "/admin/content", icon: <FileText className="w-5 h-5" /> },
+    { label: "Content", href: "/admin/content", icon: <FileText className="w-5 h-5" /> },
+    { label: "Jobs", href: "/admin/jobs", icon: <Briefcase className="w-5 h-5" /> },
+    { label: "Applications", href: "/admin/applications", icon: <Package className="w-5 h-5" /> },
     { label: "Products", href: "/admin/products", icon: <Package className="w-5 h-5" /> },
     { label: "Research", href: "/admin/research", icon: <TestTube className="w-5 h-5" /> },
     { label: "Messages", href: "/admin/messages", icon: <MessageSquare className="w-5 h-5" /> },

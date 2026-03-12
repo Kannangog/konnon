@@ -1,0 +1,17 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Resumes: anyone can upload (job applicants), only admin can read/delete
+    match /resumes/{fileName} {
+      allow create: if request.resource.size < 10 * 1024 * 1024; // max 10 MB
+      allow read, delete: if request.auth != null && request.auth.token.email == "kannan7k.rlm@gmail.com";
+    }
+
+    // Everything else: admin only
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.token.email == "kannan7k.rlm@gmail.com";
+    }
+  }
+}
+

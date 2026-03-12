@@ -5,27 +5,27 @@ import { FlaskConical, Atom, BrainCircuit, Network, Cpu, Battery, ArrowRight } f
 
 const researchTopics = [
   {
-    title: "AI Kernel Architecture",
-    category: "Software R&D",
-    description: "Developing extremely low-level operating system architectures purpose-built for AI and machine learning workloads, bypassing legacy inefficiencies.",
+    title: "Intelligent Task Classification",
+    category: "Exploration Area",
+    description: "Researching an operating system architecture where artificial intelligence assists system-level decision making and task scheduling.",
     icon: <BrainCircuit className="w-8 h-8 text-blue-400" />,
   },
   {
-    title: "Intelligent Computing Systems",
-    category: "Systems R&D",
-    description: "Designing holistic platforms where distributed compute nodes act as a single, coherent artificial intelligence organism.",
+    title: "Adaptive Computation Optimization",
+    category: "Exploration Area",
+    description: "Exploring how AI can analyze computational patterns and dynamically optimize how tasks are executed inside a computing system.",
     icon: <Network className="w-8 h-8 text-blue-400" />,
   },
   {
-    title: "Wireless Energy Systems",
-    category: "Hardware R&D",
-    description: "Exploring safe, high-efficiency resonant inductive coupling and advanced directed energy transfer for tetherless devices.",
+    title: "Efficient System Resource Management",
+    category: "Exploration Area",
+    description: "Investigating whether AI-driven orchestration can improve efficiency in hardware resource allocation for future computing platforms.",
     icon: <Battery className="w-8 h-8 text-slate-300" />,
   },
   {
-    title: "Embedded AI Hardware",
-    category: "Hardware R&D",
-    description: "Creating ultra-low-power local inference chips that bring massive intelligence to edge devices without cloud dependency.",
+    title: "AI-Assisted Performance Tuning",
+    category: "Exploration Area",
+    description: "Continuously profiling system behavior to intelligently adapt and tune performance parameters in real-time.",
     icon: <Cpu className="w-8 h-8 text-slate-300" />,
   },
 ];
@@ -46,16 +46,18 @@ export function ResearchSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6 bg-blue-950/30 border-blue-800/50 text-blue-300">
             <FlaskConical className="w-5 h-5 text-blue-400" />
             <span className="text-sm font-semibold tracking-wider uppercase">
-              Advanced Studies
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">
-            Konnon <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Research</span>
-          </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            We are dedicated to pushing the boundaries of what is possible, exploring fundamental breakthroughs in both physical and computational sciences.
-          </p>
-        </motion.div>
+            Research Overview
+          </span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+          Konnon <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Research</span>
+        </h2>
+        <div className="text-xl text-slate-400 max-w-2xl mx-auto space-y-4">
+          <p>Konnon Technologies is currently conducting early-stage research focused on next-generation computing architectures and intelligent operating systems.</p>
+          <p>Our primary research initiative explores how artificial intelligence can be integrated into system-level computing to improve efficiency, adaptability, and performance.</p>
+          <p>The research is currently in the <strong className="text-white">prototype and experimental phase</strong>, and no formal publications or commercial deployments have been released yet.</p>
+        </div>
+      </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {researchTopics.map((project, idx) => (
@@ -74,8 +76,11 @@ export function ResearchSection() {
                 <p className="text-blue-400 font-semibold tracking-widest uppercase text-xs mb-2">{project.category}</p>
                 <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed mb-4">{project.description}</p>
-                <button className="flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group/btn mx-auto sm:mx-0">
-                  Read Paper
+                <button 
+                  onClick={() => document.getElementById('current-stage')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group/btn mx-auto sm:mx-0"
+                >
+                  Active Focus
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -91,31 +96,31 @@ export function ResearchSection() {
           transition={{ duration: 0.8 }}
           className="mt-32"
         >
-          <div className="text-center mb-14">
-            <h3 className="text-3xl font-bold text-white mb-4">Selected Publications & Abstracts</h3>
-            <p className="text-slate-400 max-w-xl mx-auto">Ongoing internal research that shapes the engineering of our products.</p>
+          <div className="text-center mb-14" id="current-stage">
+            <h3 className="text-3xl font-bold text-white mb-4">Current Development Stage</h3>
+            <p className="text-slate-400 max-w-xl mx-auto">The project is still in its early research phase and is not yet publicly released.</p>
           </div>
           <div className="space-y-6">
-            {[
-              {
-                title: "Towards an AI-Native Kernel: Architecture for Low-Level Neural Execution",
-                authors: "K. Thangadurai et al. — Konnon Technologies Internal Research",
-                date: "Q1 2026",
-                abstract: "This paper presents a novel kernel architecture in which neural network inference is treated as a first-class scheduling primitive. By moving model execution into ring-0 operations, we demonstrate up to a 3.7× improvement in end-to-end agent response latency versus application-layer inference frameworks, while preserving POSIX-compatible system call interfaces."
-              },
-              {
-                title: "High-Efficiency Resonant Inductive Power Transfer at Medium Range",
-                authors: "K. Thangadurai et al. — Konnon Technologies Internal Research",
-                date: "Q3 2025",
-                abstract: "We investigate a shaped-coil resonant coupling topology capable of sustained power delivery at distances up to 0.4 meters at efficiencies exceeding 82%. The system employs active impedance matching and real-time frequency hopping to maintain stable transfer despite receiver misalignment, enabling practical wireless charging for desk-top computing and wearable form factors."
-              },
-              {
-                title: "Ambient Intelligence through Sensor Fusion on Low-Power Edge SoCs",
-                authors: "K. Thangadurai et al. — Konnon Technologies Internal Research",
-                date: "Q2 2025",
-                abstract: "This work presents a multi-modal sensor fusion pipeline — combining vision, audio, and environmental telemetry — that runs entirely on a sub-1W ARM Cortex-M SoC. Using a custom quantisation scheme, we fit a 200M-parameter multimodal model within 512 KB of SRAM, achieving contextual awareness inference at 14 FPS without cloud dependency."
-              }
-            ].map((paper, idx) => (
+          {[
+            {
+              title: "Concept Validation & Architecture Design",
+              authors: "Active Research",
+              date: "Ongoing",
+              abstract: "We are currently focused on validating the core concepts behind an AI-integrated operating system and drafting the initial architecture design for intelligent system-level decision making."
+            },
+            {
+              title: "Early Prototype Development",
+              authors: "Active Research",
+              date: "In Progress",
+              abstract: "Our team is actively engaged in early prototype development, establishing the foundation for how artificial intelligence can analyze computational patterns and execute tasks dynamically."
+            },
+            {
+              title: "Simulation and Experimentation",
+              authors: "Active Research",
+              date: "In Progress",
+              abstract: "We utilize rigorous simulation and experimentation to verify that adaptive computation optimization and intelligent task classification improve overall system efficiency."
+            }
+          ].map((paper, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
@@ -146,16 +151,18 @@ export function ResearchSection() {
           <div className="p-10 md:p-14 rounded-3xl bg-gradient-to-br from-blue-950/40 to-black border border-blue-900/30 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-transparent" />
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-6">Research Methodology</h3>
-              <p className="text-slate-400 text-lg leading-relaxed mb-10 max-w-3xl">
-                Every Konnon research initiative begins with a well-defined falsifiable hypothesis and a commitment to reproducible results. We operate an internal review process where all findings are vetted by cross-functional teams spanning software, hardware, and applied sciences before influencing product roadmaps.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { step: "01", label: "Hypothesis", desc: "Define a clear, falsifiable problem statement grounded in first-principles analysis." },
-                  { step: "02", label: "Experimentation", desc: "Build minimum viable experiments in controlled lab environments using internal testbeds." },
-                  { step: "03", label: "Integration", desc: "Validate at scale and integrate proven findings directly into product architecture." }
-                ].map((m, idx) => (
+              <h3 className="text-3xl font-bold text-white mb-6">Future Research Direction & Status</h3>
+            <p className="text-slate-400 text-lg leading-relaxed mb-10 max-w-3xl">
+              As the research progresses, Konnon Technologies aims to further explore advanced operating system architectures, intelligent system optimization, and AI-assisted computing frameworks. Future updates, publications, and prototypes will be shared as the research advances.
+              <br/><br/>
+              <strong className="text-white">Current Status: Active Research & Prototype Development.</strong> No official publications, patents, or production systems have been released at this stage. The focus is on experimentation, development, and technical exploration.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { step: "01", label: "Advanced OS Architectures", desc: "Exploring the integration of AI directly into low-level operating system components." },
+                { step: "02", label: "Intelligent System Optimization", desc: "Developing frameworks for AI-assisted performance tuning and efficient resource management." },
+                { step: "03", label: "Energy-Efficient Computing", desc: "Investigating energy-efficient AI computing models for sustainable, high-performance systems." }
+              ].map((m, idx) => (
                   <div key={idx} className="flex gap-4">
                     <div className="text-3xl font-black text-blue-900/70 flex-shrink-0">{m.step}</div>
                     <div>
