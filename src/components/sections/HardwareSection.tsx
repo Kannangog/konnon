@@ -61,8 +61,8 @@ export function HardwareSection() {
                     className="p-8 rounded-2xl border transition-colors group"
                     style={{ borderColor: BORDER, background: CARD_BG }}>
                     <Icon className="w-6 h-6 mb-6 transition-transform group-hover:scale-110" style={{ color: ACCENT }} />
-                    <h3 className="text-lg font-bold text-white mb-3 tracking-tight">{cap.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed font-light">{cap.text}</p>
+                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{cap.title}</h3>
+                    <p className="text-slate-400 text-base leading-relaxed font-light">{cap.text}</p>
                   </motion.div>
                 );
               })}
@@ -89,8 +89,8 @@ export function HardwareSection() {
                 className="relative p-8 border rounded-2xl"
                 style={{ borderColor: BORDER, background: CARD_BG }}>
                 <div className="text-4xl font-light mb-8 opacity-20 transition-opacity" style={{ color: ACCENT }}>{step.no}</div>
-                <h3 className="text-base font-bold text-white mb-3 tracking-tight">{step.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed font-light">{step.desc}</p>
+                <h3 className="text-lg font-bold text-white mb-3 tracking-tight">{step.title}</h3>
+                <p className="text-slate-400 text-base leading-relaxed font-light">{step.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -107,24 +107,24 @@ export function HardwareSection() {
               className="lg:col-span-1 p-8 rounded-2xl border flex flex-col justify-end min-h-[300px]"
               style={{ borderColor: BORDER, background: `linear-gradient(180deg, ${CARD_BG}, rgba(148,163,184,0.05))` }}>
               <Zap className="w-8 h-8 mb-auto" style={{ color: ACCENT }} />
-              <h3 className="text-2xl font-bold text-white tracking-tight mb-3">Energy Systems</h3>
-              <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xs">Micro-grid controllers, EV infrastructure, and high-voltage embedded monitoring.</p>
+              <h3 className="text-3xl font-bold text-white tracking-tight mb-4">Energy Systems</h3>
+              <p className="text-slate-400 text-base font-light leading-relaxed max-w-sm">Micro-grid controllers, EV infrastructure, and high-voltage embedded monitoring.</p>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={1} 
               className="lg:col-span-1 p-8 rounded-2xl border flex flex-col justify-end min-h-[300px]"
               style={{ borderColor: BORDER, background: `linear-gradient(180deg, ${CARD_BG}, rgba(148,163,184,0.05))` }}>
               <ShieldAlert className="w-8 h-8 mb-auto" style={{ color: ACCENT }} />
-              <h3 className="text-2xl font-bold text-white tracking-tight mb-3">Defense / Aerospace</h3>
-              <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xs">Ruggedized compute modules tested against extreme shock, vibration, and thermal envelopes.</p>
+              <h3 className="text-3xl font-bold text-white tracking-tight mb-4">Defense / Aerospace</h3>
+              <p className="text-slate-400 text-base font-light leading-relaxed max-w-sm">Ruggedized compute modules tested against extreme shock, vibration, and thermal envelopes.</p>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={2} 
               className="lg:col-span-1 p-8 rounded-2xl border flex flex-col justify-end min-h-[300px]"
               style={{ borderColor: BORDER, background: `linear-gradient(180deg, ${CARD_BG}, rgba(148,163,184,0.05))` }}>
               <Wifi className="w-8 h-8 mb-auto" style={{ color: ACCENT }} />
-              <h3 className="text-2xl font-bold text-white tracking-tight mb-3">Industrial IoT</h3>
-              <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xs">Low-power wide-area sensor networks predicting mechanical failure on the factory floor.</p>
+              <h3 className="text-3xl font-bold text-white tracking-tight mb-4">Industrial IoT</h3>
+              <p className="text-slate-400 text-base font-light leading-relaxed max-w-sm">Low-power wide-area sensor networks predicting mechanical failure on the factory floor.</p>
             </motion.div>
 
           </div>

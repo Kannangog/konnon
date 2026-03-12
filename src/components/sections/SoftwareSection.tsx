@@ -51,13 +51,13 @@ export function SoftwareSection() {
               <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6 leading-[1.1]">
                 RONNON AI
               </h2>
-              <p className="text-slate-400 text-lg leading-relaxed font-light max-w-xl mb-10">
+              <p className="text-slate-400 text-xl leading-relaxed font-light max-w-xl mb-10">
                 The world’s first truly autonomous AI software engineer. Ronnon doesn't just autocomplete code; it architectures systems, writes tests, debugs natively, and deploys global applications.
               </p>
               
               <div className="flex flex-wrap gap-3 mb-12">
                 {["Autonomous Reasoning", "Full-Stack Generation", "Self-Healing Workflows"].map((tag) => (
-                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs font-semibold border tracking-wide"
+                  <span key={tag} className="px-4 py-2 rounded-full text-sm font-semibold border tracking-wide"
                     style={{ color: CY, borderColor: BORDER, background: "rgba(6,182,212,0.05)" }}>
                     {tag}
                   </span>
@@ -65,7 +65,7 @@ export function SoftwareSection() {
               </div>
 
               <a href="https://ronnon.com" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:scale-105"
                 style={{ background: CY, color: "#030407", boxShadow: `0 0 30px rgba(6,182,212,0.3)` }}>
                 Try Ronnon Free <ArrowUpRight className="w-4 h-4" />
               </a>
@@ -103,8 +103,8 @@ export function SoftwareSection() {
                   style={{ borderColor: BORDER, background: CARD_BG }}>
                   <div className="absolute top-0 left-0 w-full h-px opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(90deg, transparent, ${CY}, transparent)` }} />
                   <Icon className="w-6 h-6 mb-6 transition-transform group-hover:scale-110" style={{ color: CY }} />
-                  <h3 className="text-lg font-bold text-white mb-3 tracking-tight">{cap.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed font-light">{cap.text}</p>
+                  <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{cap.title}</h3>
+                  <p className="text-slate-400 text-base leading-relaxed font-light">{cap.text}</p>
                 </motion.div>
               );
             })}
@@ -121,8 +121,8 @@ export function SoftwareSection() {
                   </span>
                   <ul className="space-y-3">
                     {group.items.map((item) => (
-                      <li key={item} className="text-sm text-slate-400 font-light flex items-center justify-center md:justify-start gap-3">
-                        <span className="w-1 h-1 rounded-full opacity-50" style={{ background: CY }} />
+                      <li key={item} className="text-base text-slate-400 font-light flex items-center justify-center md:justify-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full opacity-50" style={{ background: CY }} />
                         {item}
                       </li>
                     ))}

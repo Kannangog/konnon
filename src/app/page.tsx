@@ -46,7 +46,7 @@ function HomeContent() {
                 </div>
                 <span className="text-lg font-semibold tracking-wide text-white">KONNON</span>
               </div>
-              <p className="text-slate-500 text-sm leading-relaxed max-w-sm mx-auto md:mx-0 font-light">
+              <p className="text-slate-500 text-base leading-relaxed max-w-sm mx-auto md:mx-0 font-light">
                 Engineering precision hardware, autonomous software agents, and the infrastructure of tomorrow. Built in Bengaluru, India.
               </p>
             </div>
@@ -87,7 +87,7 @@ function HomeContent() {
                       <li key={l.label}>
                         <Link
                           href={l.href}
-                          className="text-sm text-slate-400 hover:text-white transition-colors font-light"
+                          className="text-base text-slate-400 hover:text-white transition-colors font-light"
                           {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                         >
                           {l.label}
