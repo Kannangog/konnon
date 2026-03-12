@@ -25,7 +25,7 @@ const CARD_BG = "rgba(255,255,255,0.015)";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  show: (i: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] } }),
+  show: (i: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } }),
 };
 
 export function SoftwareSection() {

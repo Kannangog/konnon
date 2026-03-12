@@ -26,7 +26,7 @@ const CARD_HOVER = "rgba(148,163,184,0.03)";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  show: (i: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] } }),
+  show: (i: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } }),
 };
 
 export function HardwareSection() {
