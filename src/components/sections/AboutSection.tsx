@@ -76,6 +76,67 @@ export function AboutSection() {
             </motion.div>
 
         </div>
+
+        {/* Core Values */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-32"
+        >
+          <h3 className="text-3xl font-bold text-white mb-12 text-center">Core Principles</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "First Principles Thinking", desc: "We strip problems down to their fundamental truths and build up from there, ignoring industry dogmas." },
+              { title: "Relentless Iteration", desc: "Speed of execution and compounding improvements over time define our engineering culture." },
+              { title: "Vertical Integration", desc: "By controlling the full stack from silicon to user experience, we achieve unparalleled optimization." }
+            ].map((value, idx) => (
+              <div key={idx} className="p-8 rounded-2xl bg-black/40 border border-slate-800/50 hover:border-blue-500/30 transition-colors">
+                <div className="w-12 h-12 rounded-full bg-blue-900/20 flex items-center justify-center text-blue-400 font-bold mb-6 text-xl">
+                  0{idx + 1}
+                </div>
+                <h4 className="text-xl font-bold text-white mb-3">{value.title}</h4>
+                <p className="text-slate-400 leading-relaxed">{value.desc}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Brief History / Timeline */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-32 pb-16"
+        >
+          <div className="p-12 rounded-3xl bg-gradient-to-br from-slate-900/80 to-black border border-slate-800 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-transparent" />
+            <h3 className="text-3xl font-bold text-white mb-8">The Journey</h3>
+            <div className="space-y-8">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-12">
+                <div className="md:w-32 flex-shrink-0">
+                  <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">2026</span>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-white mb-2">Expansion into Intelligent Hardware</h4>
+                  <p className="text-slate-400">Launch of our advanced R&D divisions focusing on ambient computing, AI-integrated wearables, and decentralized operating topologies.</p>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row gap-6 md:gap-12">
+                <div className="md:w-32 flex-shrink-0">
+                  <span className="text-xl font-black text-slate-600">2024</span>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-white mb-2">Foundation of Konnon Technologies</h4>
+                  <p className="text-slate-400">Established with a focus on deep-tech software solutions and redefining the architecture of scalable applications.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

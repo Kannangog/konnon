@@ -148,6 +148,35 @@ export function ContactSection() {
           </motion.div>
 
         </div>
+
+        {/* FAQ Section */}
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8 }}
+           className="mt-32 pb-16 lg:w-3/4 mx-auto"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h3>
+            <p className="text-slate-400">Common inquiries regarding our technologies and operations.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              { q: "Do you offer developer access to the AI Operating System?", a: "We are currently in a closed beta phase for select enterprise partners. Public developer access is planned for Q4 2026." },
+              { q: "Is Konnon Technologies a hardware or software company?", a: "Both. We believe that to build truly next-generation intelligent systems, the hardware and software must be co-designed from the ground up." },
+              { q: "Where can I purchase Konnon Smart Glasses?", a: "Our Smart Glasses and other consumer-facing hardware products are currently in the prototyping and iteration phase. Join our mailing list for release updates." },
+              { q: "How can my company partner with Konnon for R&D?", a: "Please use the Direct Inquiries email provided above. Include a brief overview of your organization and the specific areas of interest for collaboration." }
+            ].map((faq, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-black/40 border border-slate-800">
+                <h4 className="text-lg font-bold text-white mb-2">{faq.q}</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
