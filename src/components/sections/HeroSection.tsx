@@ -41,16 +41,15 @@ export function HeroSection({ mode, setMode }: HeroSectionProps) {
           transition={{ duration: 0.45 }}
           className="max-w-4xl text-center"
         >
-          <div className="mb-6 inline-block">
-            <span className="px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-sm font-medium tracking-widest uppercase text-gray-300">
-              Konnon Technologies
-            </span>
-          </div>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 leading-tight">
-            Building the Next Generation of AI Operating Systems and Intelligent Hardware
+            {mode === "hardware" 
+              ? "Next-Generation Intelligent Hardware" 
+              : "Advanced AI & Software Platforms"}
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Konnon Technologies is an early-stage research and development company focused on building advanced computing systems, intelligent software platforms, and next-generation hardware technologies.
+            {mode === "hardware"
+              ? "We design powerful physical systems, IoT devices, and advanced silicon architectures for the future of computing."
+              : "Building intelligent operating systems, cognitive agents, and scalable cloud infrastructures."}
           </p>
         </motion.div>
 
