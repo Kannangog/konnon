@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 interface NavbarProps {
   mode: "hardware" | "software";
@@ -12,169 +14,207 @@ interface NavbarProps {
 export function Navbar({ mode, setMode }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Links that switch mode AND scroll to top
   const modeLinks = [
     { name: "Hardware", mode: "hardware" as const },
     { name: "Software", mode: "software" as const },
   ];
 
-  // Links that just scroll to their section anchor
-  const anchorLinks = [
-    { name: "About", href: "#about" },
-    { name: "Innovations", href: "#innovations" },
-    { name: "Research", href: "#research" },
-    { name: "Careers", href: "#careers" },
-    { name: "Contact", href: "#contact" },
+  const pageLinks = [
+    { name: "About", href: "/about" },
+    { name: "Innovations", href: "/innovations" },
+    { name: "Research", href: "/research" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const handleModeSwitch = (newMode: "hardware" | "software") => {
     setMode(newMode);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (pathname !== "/") {
+      router.push(`/?mode=${newMode}`);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     setMobileMenuOpen(false);
   };
 
+  const isHw = mode === "hardware";
+  const accent = isHw ? "#94a3b8" : "#06b6d4";
+  const accentGlow = isHw ? "rgba(148,163,184,0.15)" : "rgba(6,182,212,0.15)";
+  const accentBorder = isHw ? "rgba(148,163,184,0.25)" : "rgba(6,182,212,0.25)";
+
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/75 backdrop-blur-xl py-4" : "bg-transparent py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+    <>
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${
+          scrolled
+            ? "bg-[#030407]/80 backdrop-blur-2xl py-3 border-white/[0.04] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]"
+            : "bg-transparent py-5 border-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group focus:outline-none">
+            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg overflow-hidden border transition-colors duration-500"
+              style={{ borderColor: accentBorder, background: "rgba(255,255,255,0.02)" }}>
+              {/* Subtle inner glow */}
+              <div className="absolute inset-0 opacity-20 transition-colors duration-500" style={{ background: `radial-gradient(circle at center, ${accent}, transparent 70%)` }} />
+              <span className="relative z-10 text-sm font-bold tracking-tighter" style={{ color: accent }}>K</span>
+            </div>
+            <span className="text-base font-semibold tracking-wide text-white group-hover:opacity-80 transition-opacity">
+              KONNON
+            </span>
+          </Link>
 
-        {/* LOGO */}
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="flex items-center gap-2.5 group focus:outline-none"
-          aria-label="Go to top"
-        >
-          {/* K hexagon mark */}
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="logoGrad" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#22d3ee" />
-                <stop offset="100%" stopColor="#3b82f6" />
-              </linearGradient>
-            </defs>
-            {/* Hexagon outline */}
-            <path
-              d="M17 2L31 10V26L17 34L3 26V10L17 2Z"
-              stroke="url(#logoGrad)"
-              strokeWidth="1.5"
-              fill="none"
-              className="group-hover:opacity-80 transition-opacity"
-            />
-            {/* Inner glow fill */}
-            <path
-              d="M17 5L29 12V26L17 33L5 26V12L17 5Z"
-              fill="url(#logoGrad)"
-              fillOpacity="0.08"
-            />
-            {/* K letterform */}
-            <text
-              x="17"
-              y="22.5"
-              textAnchor="middle"
-              fontFamily="system-ui, -apple-system, sans-serif"
-              fontSize="14"
-              fontWeight="700"
-              fill="url(#logoGrad)"
-              letterSpacing="-0.5"
-            >K</text>
-          </svg>
-          <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-gray-300 transition-all">
-            KONNON
-          </span>
-        </button>
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex items-center gap-8">
+            {/* Mode Switcher */}
+            <div className="flex p-1 rounded-full border bg-[#0a0f18]/50 backdrop-blur-md"
+              style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+              {modeLinks.map((link) => {
+                const isActive = mode === link.mode && pathname === "/";
+                return (
+                  <button
+                    key={link.name}
+                    onClick={() => handleModeSwitch(link.mode)}
+                    className="relative px-5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-500 overflow-hidden"
+                    style={{ color: isActive ? "#030407" : "#64748b" }}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="navModePill"
+                        className="absolute inset-0 rounded-full"
+                        style={{ background: accent, boxShadow: `0 0 20px ${accentGlow}` }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{link.name}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-6">
-          {/* Mode-switching links */}
-          {modeLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => handleModeSwitch(link.mode)}
-              className={`text-sm font-medium uppercase tracking-widest relative group transition-colors pb-1 ${
-                mode === link.mode ? "text-white" : "text-gray-400 hover:text-white"
-              }`}
-            >
-              {link.name}
-              <span
-                className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300 ${
-                  mode === link.mode ? "w-full" : "w-0 group-hover:w-full"
-                }`}
-              />
-            </button>
-          ))}
+            <div className="w-px h-4 bg-slate-800" />
 
-          {/* Divider */}
-          <span className="w-px h-4 bg-white/15" />
+            {/* Links */}
+            <div className="flex items-center gap-6">
+              {pageLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-xs font-semibold uppercase tracking-widest transition-colors relative group py-2"
+                    style={{ color: isActive ? "#fff" : "#64748b" }}
+                  >
+                    {link.name}
+                    <span
+                      className="absolute bottom-0 left-0 h-[2px] w-full origin-left transition-transform duration-300"
+                      style={{
+                        background: accent,
+                        transform: isActive ? "scaleX(1)" : "scaleX(0)",
+                      }}
+                    />
+                    {!isActive && (
+                      <span className="absolute bottom-0 left-0 h-[2px] w-full bg-slate-700 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
 
-          {/* Anchor-only links */}
-          {anchorLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-gray-400 hover:text-white transition-colors uppercase tracking-widest relative group pb-1"
-            >
-              {link.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          {/* Mobile Toggle */}
+          <button
+            className="lg:hidden text-slate-400 hover:text-white transition-colors"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open Menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
+      </nav>
 
-        {/* Mobile menu toggle */}
-        <button
-          className="md:hidden text-gray-300 hover:text-white"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/95 backdrop-blur-3xl overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-[#030407]/95 backdrop-blur-2xl flex flex-col"
           >
-            <div className="px-6 py-6 flex flex-col gap-5">
-              {modeLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => handleModeSwitch(link.mode)}
-                  className={`text-left text-base font-medium uppercase tracking-widest transition-colors ${
-                    mode === link.mode ? "text-cyan-400" : "text-gray-300 hover:text-white"
-                  }`}
-                >
-                  {link.name}
-                </button>
-              ))}
-              <div className="h-px bg-white/10" />
-              {anchorLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-gray-300 hover:text-white uppercase tracking-widest"
-                >
-                  {link.name}
-                </a>
-              ))}
+            <div className="px-6 py-5 flex items-center justify-between border-b border-white/5">
+              <span className="text-base font-semibold tracking-wide text-white">MENU</span>
+              <button
+                className="text-slate-400 hover:text-white transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto px-6 py-10 flex flex-col gap-8">
+              {/* Mobile Mode Switcher */}
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-4">Division</p>
+                <div className="flex flex-col gap-2">
+                  {modeLinks.map((link) => {
+                    const isActive = mode === link.mode && pathname === "/";
+                    return (
+                      <button
+                        key={link.name}
+                        onClick={() => handleModeSwitch(link.mode)}
+                        className="flex items-center justify-between p-4 rounded-xl border transition-all"
+                        style={{
+                          borderColor: isActive ? accentBorder : "rgba(255,255,255,0.05)",
+                          background: isActive ? accentGlow : "transparent"
+                        }}
+                      >
+                        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: isActive ? accent : "#94a3b8" }}>
+                          {link.name}
+                        </span>
+                        {isActive && <div className="w-2 h-2 rounded-full" style={{ background: accent, boxShadow: `0 0 10px ${accent}` }} />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="w-full h-px bg-slate-800/50" />
+
+              {/* Mobile Links */}
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-4">Navigation</p>
+                <div className="flex flex-col gap-4">
+                  {pageLinks.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-xl font-medium tracking-tight transition-colors"
+                        style={{ color: isActive ? "#fff" : "#64748b" }}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }

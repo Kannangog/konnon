@@ -1,23 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Konnon Technologies | AI Operating Systems and Intelligent Hardware",
-  description: "Konnon Technologies is building next-generation AI operating systems, intelligent software platforms, and advanced hardware systems.",
+  title: "Konnon Technologies | Precision Hardware & AI Systems",
+  description: "Konnon Technologies engineers next-generation AI operating systems, intelligent software platforms, and advanced hardware architectures.",
   openGraph: {
-    title: "Konnon Technologies | AI Operating Systems and Intelligent Hardware",
-    description: "Konnon Technologies is building next-generation AI operating systems, intelligent software platforms, and advanced hardware systems.",
+    title: "Konnon Technologies | Precision Hardware & AI Systems",
+    description: "Konnon Technologies engineers next-generation AI operating systems, intelligent software platforms, and advanced hardware architectures.",
     url: "https://konnon.com",
     siteName: "Konnon Technologies",
     locale: "en_US",
@@ -32,9 +28,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} font-sans antialiased bg-[#030407] text-slate-200 selection:bg-slate-700 selection:text-white`}>
+        <div className="noise-overlay" />
         {children}
       </body>
     </html>

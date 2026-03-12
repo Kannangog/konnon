@@ -1,125 +1,140 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Smartphone, Database, Network, BrainCircuit, Globe } from "lucide-react";
+import { BrainCircuit, Globe, Database, Network, Terminal, Layers, ArrowUpRight } from "lucide-react";
 
-const features = [
-  {
-    title: "AI Systems",
-    description: "Deploying machine learning models, neural networks, and generative AI to solve complex business challenges.",
-    icon: <BrainCircuit className="w-6 h-6 text-cyan-400" />,
-  },
-  {
-    title: "Mobile Apps",
-    description: "Native and cross-platform mobile experiences designed for speed, fluidity, and user delight.",
-    icon: <Smartphone className="w-6 h-6 text-cyan-400" />,
-  },
-  {
-    title: "Custom Platforms",
-    description: "Scalable, secure, and distributed cloud architectures tailored to specific enterprise needs.",
-    icon: <Globe className="w-6 h-6 text-cyan-400" />,
-  },
-  {
-    title: "Advanced Computing",
-    description: "High-performance data processing, real-time analytics, and secure scalable databases.",
-    icon: <Database className="w-6 h-6 text-cyan-400" />,
-  },
+/* ─── Data ─────────────────────────────────────────── */
+const capabilities = [
+  { icon: BrainCircuit, title: "Autonomous Agents", text: "Multi-modal AI architectures capable of reasoning, planning, and executing complex software workflows." },
+  { icon: Globe, title: "Enterprise Platforms", text: "Global-scale SaaS infrastructure designed for extreme concurrency, tenant isolation, and 99.99% uptime." },
+  { icon: Database, title: "Intelligent Data Ops", text: "Real-time vector pipelines, RAG implementations, and petabyte-scale streaming analytics engines." },
+  { icon: Network, title: "Cloud Native", text: "Immutable Kubernetes deployments, zero-trust service meshes, and GitOps-driven delivery pipelines." },
 ];
+
+const stack = [
+  { label: "Core", items: ["TypeScript", "Rust", "Go", "Python"] },
+  { label: "AI & ML", items: ["PyTorch", "JAX", "vLLM", "TensorRT"] },
+  { label: "Compute", items: ["GCP", "Kubernetes", "Ray", "Fly.io"] },
+  { label: "State", items: ["ClickHouse", "PostgreSQL", "Redis", "Kafka"] },
+];
+
+/* ─── Shared Styles ───────────────────────────────── */
+const CY = "#06b6d4";
+const BORDER = "rgba(6,182,212,0.15)";
+const CARD_BG = "rgba(255,255,255,0.015)";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: (i: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] } }),
+};
 
 export function SoftwareSection() {
   return (
-    <section id="software" className="relative py-28 bg-[#020617] overflow-hidden">
-      {/* Reduced blur blobs */}
-      <div className="absolute top-1/4 left-0 w-[450px] h-[450px] bg-cyan-900/15 rounded-full blur-[80px] -translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[350px] h-[350px] bg-blue-900/15 rounded-full blur-[70px] translate-x-1/3 pointer-events-none" />
+    <div id="software" className="bg-[#030407] selection:bg-cyan-900 selection:text-white">
 
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
-        style={{ backgroundImage: "linear-gradient(cyan 1px, transparent 1px), linear-gradient(90deg, cyan 1px, transparent 1px)", backgroundSize: "60px 60px" }}
-      />
+      {/* ── Ronnon Hero ───────────────────────────────── */}
+      <section className="relative py-32 overflow-hidden border-t" style={{ borderColor: BORDER }}>
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: `linear-gradient(${CY} 1px, transparent 1px), linear-gradient(90deg, ${CY} 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={0} 
+            className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24 p-10 md:p-16 rounded-3xl border overflow-hidden relative group"
+            style={{ background: `linear-gradient(135deg, ${CARD_BG}, rgba(6,182,212,0.03))`, borderColor: BORDER }}>
+            
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full mix-blend-screen opacity-20 pointer-events-none transition-opacity duration-1000 group-hover:opacity-40"
+              style={{ background: `radial-gradient(circle, ${CY}, transparent 70%)`, transform: "translate(40%, -40%) blur(60px)" }} />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-14 items-center">
-
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
-            className="lg:w-1/2"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-950/50 border border-cyan-800 mb-6">
-              <Code2 className="w-5 h-5 text-cyan-400" />
-              <span className="text-sm font-semibold tracking-wider uppercase text-cyan-400">Software Division</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight leading-tight">
-              Software <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Platforms</span>
-            </h2>
-            <p className="text-xl text-slate-300/80 mb-8 leading-relaxed">
-              We build advanced software platforms including AI systems, intelligent developer tools, and next-generation computing environments.
-            </p>
-            <div className="space-y-5">
-              {[
-                { icon: <Network className="w-5 h-5" />, text: "Distributed Cloud Infrastructure" },
-                { icon: <Database className="w-5 h-5" />, text: "Real-time AI Model Inference" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 text-cyan-100">
-                  <div className="w-10 h-10 rounded-full bg-cyan-950/80 flex items-center justify-center border border-cyan-800/50">
-                    {item.icon}
-                  </div>
-                  <span className="font-medium">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
-            className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-5"
-          >
-            {/* Ronnon AI Feature Card */}
-            <div className="col-span-1 sm:col-span-2 p-7 rounded-2xl bg-gradient-to-br from-purple-900/40 to-blue-900/20 border border-cyan-500/30 hover:border-cyan-400/50 hover:from-purple-900/50 hover:to-blue-900/30 transition-all group relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-[40px] group-hover:bg-cyan-500/20 transition-colors" />
-              <div className="flex items-start justify-between relative z-10">
-                <div>
-                  <div className="w-12 h-12 bg-purple-900/80 border border-purple-500/50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                    <BrainCircuit className="w-6 h-6 text-purple-400" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-3">RONNON AI</h3>
-                  <p className="text-slate-300 leading-relaxed max-w-md mb-6">
-                    Ronnon is our AI coding agent designed to build software automatically, assist developers, and accelerate software development.
-                  </p>
-                </div>
+            <div className="flex-1 relative z-10">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] mb-6 block" style={{ color: CY }}>Flagship AI Assistant</span>
+              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6 leading-[1.1]">
+                RONNON AI
+              </h2>
+              <p className="text-slate-400 text-lg leading-relaxed font-light max-w-xl mb-10">
+                The world’s first truly autonomous AI software engineer. Ronnon doesn't just autocomplete code; it architectures systems, writes tests, debugs natively, and deploys global applications.
+              </p>
+              
+              <div className="flex flex-wrap gap-3 mb-12">
+                {["Autonomous Reasoning", "Full-Stack Generation", "Self-Healing Workflows"].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs font-semibold border tracking-wide"
+                    style={{ color: CY, borderColor: BORDER, background: "rgba(6,182,212,0.05)" }}>
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <a 
-                href="https://ronnon.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium hover:scale-105 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.4)] relative z-10"
-              >
-                Open Ronnon
+
+              <a href="https://ronnon.com" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105"
+                style={{ background: CY, color: "#030407", boxShadow: `0 0 30px rgba(6,182,212,0.3)` }}>
+                Try Ronnon Free <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
+            
+            <div className="lg:w-[400px] shrink-0 border rounded-2xl p-6 relative z-10 backdrop-blur-xl" style={{ borderColor: BORDER, background: "rgba(3,4,7,0.8)" }}>
+               <div className="flex gap-2 items-center mb-6">
+                 <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                 <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                 <div className="w-2 h-2 rounded-full bg-green-500/50" />
+               </div>
+               <div className="space-y-4 font-mono text-sm leading-relaxed" style={{ color: CY }}>
+                 <p className="opacity-60">$ ronnon generate system</p>
+                 <p className="text-slate-300">&gt; Analyzing requirements...</p>
+                 <p className="text-slate-300">&gt; Building scalable architecture...</p>
+                 <p className="text-slate-300">&gt; Writing 48 components...</p>
+                 <p className="text-white font-bold">&gt; Deployment successful. ⚡</p>
+               </div>
+            </div>
 
-            {features.slice(0, 2).map((feature, idx) => (
-              <div
-                key={idx}
-                className="p-7 rounded-2xl bg-slate-900/50 border border-cyan-900/30 hover:border-cyan-500/50 hover:bg-slate-800/70 transition-all group"
-              >
-                <div className="w-12 h-12 bg-cyan-950/80 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
           </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ── Capabilities ──────────────────────────────── */}
+      <section className="relative py-24 border-t" style={{ borderColor: BORDER }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+            {capabilities.map((cap, i) => {
+              const Icon = cap.icon;
+              return (
+                <motion.div key={cap.title} custom={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+                  className="p-8 rounded-2xl border transition-colors group relative overflow-hidden"
+                  style={{ borderColor: BORDER, background: CARD_BG }}>
+                  <div className="absolute top-0 left-0 w-full h-px opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(90deg, transparent, ${CY}, transparent)` }} />
+                  <Icon className="w-6 h-6 mb-6 transition-transform group-hover:scale-110" style={{ color: CY }} />
+                  <h3 className="text-lg font-bold text-white mb-3 tracking-tight">{cap.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed font-light">{cap.text}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* ── Stack ── */}
+          <div className="border-t pt-24" style={{ borderColor: BORDER }}>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] mb-12 block text-center" style={{ color: CY }}>Technology Stack</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 max-w-4xl mx-auto">
+              {stack.map((group, gi) => (
+                <motion.div key={gi} custom={gi} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center md:text-left">
+                  <span className="text-xs font-semibold uppercase tracking-widest block mb-4" style={{ color: CY }}>
+                    {group.label}
+                  </span>
+                  <ul className="space-y-3">
+                    {group.items.map((item) => (
+                      <li key={item} className="text-sm text-slate-400 font-light flex items-center justify-center md:justify-start gap-3">
+                        <span className="w-1 h-1 rounded-full opacity-50" style={{ background: CY }} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
   );
 }
