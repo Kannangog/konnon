@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Code, ArrowDown } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -19,6 +20,15 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ mode, setMode }: HeroSectionProps) {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const isHw = mode === "hardware";
   const accent = isHw ? "#94a3b8" : "#06b6d4";
   const accentGlow = isHw
@@ -33,8 +43,15 @@ export function HeroSection({ mode, setMode }: HeroSectionProps) {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-[#030407]">
       {/* 3D Background */}
-      <div className="absolute inset-0 z-0 opacity-80 mix-blend-screen">
-        {isHw ? (
+      <div className="absolute inset-0 z-0 opacity-80 md:mix-blend-screen">
+        {isMobile ? (
+          <div 
+            className="absolute inset-0 opacity-20"
+            style={{
+              background: `radial-gradient(circle at 50% 50%, ${accent} 0%, transparent 60%)`
+            }}
+          />
+        ) : isHw ? (
           <Spline scene="https://prod.spline.design/WqRXKFkICTAdJvFx/scene.splinecode" />
         ) : (
           <Spline scene="https://prod.spline.design/u1NJmT-8nQfrokiH/scene.splinecode" />

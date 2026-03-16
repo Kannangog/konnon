@@ -8,8 +8,8 @@ export function AboutSection() {
     <section id="about" className="relative py-32 bg-[#050505] overflow-hidden">
       
       {/* Abstract Background Shapes */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-slate-800/10 rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px]" />
+      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-slate-800/10 rounded-full blur-[120px]" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         
@@ -42,7 +42,7 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             className="p-10 rounded-3xl bg-slate-900/40 border border-slate-800 relative overflow-hidden group"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[50px] group-hover:bg-blue-500/20 transition-colors" />
+            <div className="hidden md:block absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[50px] group-hover:bg-blue-500/20 transition-colors" />
             <Target className="w-12 h-12 text-blue-400 mb-6" />
             <h3 className="text-3xl font-bold text-white mb-4">Our Mission</h3>
               <p className="text-lg text-slate-400 leading-relaxed">
@@ -58,7 +58,7 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="p-10 rounded-3xl bg-slate-900/40 border border-slate-800 relative overflow-hidden group flex flex-col justify-center"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-[50px] group-hover:bg-cyan-500/20 transition-colors" />
+              <div className="hidden md:block absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-[50px] group-hover:bg-cyan-500/20 transition-colors" />
               <div className="flex items-center gap-6 mb-4 relative z-10">
                  <div className="w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 p-[2px]">
                    <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">

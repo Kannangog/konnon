@@ -43,7 +43,7 @@ export function SoftwareSection() {
             style={{ background: `linear-gradient(135deg, ${CARD_BG}, rgba(6,182,212,0.03))`, borderColor: BORDER }}>
             
             {/* Ambient Background Glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full mix-blend-screen opacity-20 pointer-events-none transition-opacity duration-1000 group-hover:opacity-40"
+            <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] rounded-full mix-blend-screen opacity-20 pointer-events-none transition-opacity duration-1000 group-hover:opacity-40"
               style={{ background: `radial-gradient(circle, ${CY}, transparent 70%)`, transform: "translate(40%, -40%) blur(60px)" }} />
 
             <div className="flex-1 relative z-10">
@@ -71,7 +71,7 @@ export function SoftwareSection() {
               </a>
             </div>
             
-            <div className="lg:w-[400px] shrink-0 border rounded-2xl p-6 relative z-10 backdrop-blur-xl" style={{ borderColor: BORDER, background: "rgba(3,4,7,0.8)" }}>
+            <div className="lg:w-[400px] shrink-0 border rounded-2xl p-6 relative z-10 md:backdrop-blur-xl" style={{ borderColor: BORDER, background: "rgba(3,4,7,0.8)" }}>
                <div className="flex gap-2 items-center mb-6">
                  <div className="w-2 h-2 rounded-full bg-red-500/50" />
                  <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
