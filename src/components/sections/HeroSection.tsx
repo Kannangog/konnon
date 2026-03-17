@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Code, ArrowDown } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -19,21 +19,39 @@ interface HeroSectionProps {
   setMode: (mode: "hardware" | "software") => void;
 }
 
-export function HeroSection({ mode, setMode }: HeroSectionProps) {
-  const [isMobile, setIsMobile] = useState(true);
+/** Returns true if we should skip the heavy Spline scene */
+function useIsLowEndDevice() {
+  const [isLowEnd, setIsLowEnd] = useState(true); // start true to avoid flicker
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lowCPU = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
+    const isMobile = window.innerWidth < 768;
+    setIsLowEnd(prefersReduced || lowCPU || isMobile);
   }, []);
+
+  return isLowEnd;
+}
+
+export function HeroSection({ mode, setMode }: HeroSectionProps) {
+  const isLowEnd = useIsLowEndDevice();
+  // Defer mounting Spline by one frame so it never blocks first paint
+  const [splineMounted, setSplineMounted] = useState(false);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!isLowEnd) {
+      // Mount Spline after the browser completes the first paint
+      rafRef.current = requestAnimationFrame(() => {
+        setSplineMounted(true);
+      });
+    }
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [isLowEnd]);
 
   const isHw = mode === "hardware";
   const accent = isHw ? "#94a3b8" : "#06b6d4";
-  const accentGlow = isHw
-    ? "rgba(148,163,184,0.15)"
-    : "rgba(6,182,212,0.2)";
+  const accentGlow = isHw ? "rgba(148,163,184,0.15)" : "rgba(6,182,212,0.2)";
 
   const scrollDown = () => {
     const next = document.getElementById(isHw ? "hardware" : "software");
@@ -44,17 +62,29 @@ export function HeroSection({ mode, setMode }: HeroSectionProps) {
     <section className="relative w-full h-screen overflow-hidden bg-[#030407]">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0 opacity-80 md:mix-blend-screen">
-        {isMobile ? (
-          <div 
-            className="absolute inset-0 opacity-20"
+        {isLowEnd ? (
+          /* Lightweight CSS gradient fallback — zero GPU cost */
+          <div
+            className="absolute inset-0"
             style={{
-              background: `radial-gradient(circle at 50% 50%, ${accent} 0%, transparent 60%)`
+              background: `radial-gradient(ellipse 80% 60% at 50% 40%, ${accentGlow} 0%, transparent 70%)`,
+              transition: "background 0.6s ease",
             }}
           />
-        ) : isHw ? (
-          <Spline scene="https://prod.spline.design/WqRXKFkICTAdJvFx/scene.splinecode" />
+        ) : splineMounted ? (
+          isHw ? (
+            <Spline scene="https://prod.spline.design/WqRXKFkICTAdJvFx/scene.splinecode" />
+          ) : (
+            <Spline scene="https://prod.spline.design/u1NJmT-8nQfrokiH/scene.splinecode" />
+          )
         ) : (
-          <Spline scene="https://prod.spline.design/u1NJmT-8nQfrokiH/scene.splinecode" />
+          /* Show gradient while Spline loads — no blank flash */
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `radial-gradient(ellipse 80% 60% at 50% 40%, ${accentGlow} 0%, transparent 70%)`,
+            }}
+          />
         )}
         {/* Hide Spline branding */}
         <div className="absolute bottom-0 right-0 w-64 h-20 bg-[#030407] z-10 pointer-events-none" />
@@ -79,11 +109,12 @@ export function HeroSection({ mode, setMode }: HeroSectionProps) {
         <AnimatePresence mode="wait">
           <motion.div
             key={mode}
-            initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+            initial={{ opacity: 0, filter: "blur(8px)", y: 20 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            exit={{ opacity: 0, filter: "blur(10px)", y: -20 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, filter: "blur(8px)", y: -20 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-5xl text-center"
+            style={{ willChange: "transform, opacity" }}
           >
             {/* Minimal Mode Badge */}
             <div className="flex items-center justify-center gap-3 mb-8">
@@ -161,7 +192,7 @@ export function HeroSection({ mode, setMode }: HeroSectionProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 px-6 py-2 rounded-full border border-cyan-900/40 bg-cyan-950/20 hover:bg-cyan-900/30 transition-colors"
-                style={{ color: accent }}
+                style={{ color: accent, willChange: "transform, opacity" }}
               >
                 <span className="text-xs font-semibold tracking-wide">Ship instantly with Ronnon AI</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -183,6 +214,7 @@ export function HeroSection({ mode, setMode }: HeroSectionProps) {
             animate={{ y: [0, 16, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="w-1 h-2 rounded-full bg-slate-400"
+            style={{ willChange: "transform" }}
           />
         </div>
       </button>

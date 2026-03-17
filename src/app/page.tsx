@@ -52,7 +52,7 @@ function HomeContent() {
             </div>
 
             {/* Links Columns */}
-            <div className="md:col-span-7 lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            <div className="md:col-span-7 lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-8">
               {[
                 {
                   title: "Company",
@@ -74,6 +74,13 @@ function HomeContent() {
                   links: [
                     { label: "Hardware", href: "/?mode=hardware" },
                     { label: "Software", href: "/?mode=software" },
+                  ],
+                },
+                {
+                  title: "Legal",
+                  links: [
+                    { label: "Privacy Policy", href: "/privacy-policy" },
+                    { label: "Terms of Service", href: "/terms" },
                   ],
                 },
               ].map((col) => (
@@ -104,9 +111,11 @@ function HomeContent() {
             <p className="text-slate-600 text-xs font-light">
               © {new Date().getFullYear()} Konnon Technologies Private Limited.
             </p>
-            <p className="text-slate-600 text-xs font-light tracking-widest uppercase">
-              All Rights Reserved
-            </p>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy-policy" className="text-slate-600 hover:text-slate-400 text-xs font-light transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="text-slate-600 hover:text-slate-400 text-xs font-light transition-colors">Terms of Service</Link>
+              <p className="text-slate-600 text-xs font-light tracking-widest uppercase">All Rights Reserved</p>
+            </div>
           </div>
         </div>
       </footer>

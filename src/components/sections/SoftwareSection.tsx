@@ -38,13 +38,13 @@ export function SoftwareSection() {
           style={{ backgroundImage: `linear-gradient(${CY} 1px, transparent 1px), linear-gradient(90deg, ${CY} 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
         
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={0} 
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.05 }} variants={fadeUp} custom={0} 
             className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24 p-10 md:p-16 rounded-3xl border overflow-hidden relative group"
-            style={{ background: `linear-gradient(135deg, ${CARD_BG}, rgba(6,182,212,0.03))`, borderColor: BORDER }}>
+            style={{ background: `linear-gradient(135deg, ${CARD_BG}, rgba(6,182,212,0.03))`, borderColor: BORDER, willChange: "transform, opacity" }}>
             
             {/* Ambient Background Glow */}
             <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] rounded-full mix-blend-screen opacity-20 pointer-events-none transition-opacity duration-1000 group-hover:opacity-40"
-              style={{ background: `radial-gradient(circle, ${CY}, transparent 70%)`, transform: "translate(40%, -40%) blur(60px)" }} />
+              style={{ background: `radial-gradient(circle, ${CY}, transparent 70%)`, transform: "translate(40%, -40%)", filter: "blur(60px)", willChange: "opacity" }} />
 
             <div className="flex-1 relative z-10">
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] mb-6 block" style={{ color: CY }}>Flagship AI Assistant</span>

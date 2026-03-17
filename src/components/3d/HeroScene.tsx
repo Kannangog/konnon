@@ -11,7 +11,7 @@ export function HeroScene({ mode }: { mode: "hardware" | "software" }) {
   const particlesRef = useRef<THREE.Points>(null);
 
   // Generate particles based on mode
-  const particlesCount = 2000;
+  const particlesCount = 800;
   const positions = useMemo(() => {
     const pos = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount; i++) {
@@ -22,18 +22,19 @@ export function HeroScene({ mode }: { mode: "hardware" | "software" }) {
     return pos;
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
+    // Cap delta to prevent hitching when tab loses/regains focus
+    const d = Math.min(delta, 0.05);
     if (coreRef.current) {
-        coreRef.current.rotation.y += delta * 0.2;
-        coreRef.current.rotation.x += delta * 0.1;
+      coreRef.current.rotation.y += d * 0.2;
+      coreRef.current.rotation.x += d * 0.1;
     }
-    
     if (particlesRef.current) {
       if (isHardware) {
-        particlesRef.current.rotation.y -= delta * 0.05;
+        particlesRef.current.rotation.y -= d * 0.05;
       } else {
-        particlesRef.current.rotation.y += delta * 0.15;
-        particlesRef.current.rotation.x += delta * 0.05;
+        particlesRef.current.rotation.y += d * 0.15;
+        particlesRef.current.rotation.x += d * 0.05;
       }
     }
   });

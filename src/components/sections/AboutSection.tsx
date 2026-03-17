@@ -7,17 +7,17 @@ export function AboutSection() {
   return (
     <section id="about" className="relative py-32 bg-[#050505] overflow-hidden">
       
-      {/* Abstract Background Shapes */}
-      <div className="hidden md:block absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[100px]" />
-      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-slate-800/10 rounded-full blur-[120px]" />
+      {/* Abstract Background Shapes — hidden on mobile, GPU-isolated on desktop */}
+      <div className="hidden md:block absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-[60px]" style={{ transform: "translateZ(0)" }} />
+      <div className="hidden md:block absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-slate-800/10 rounded-full blur-[80px]" style={{ transform: "translateZ(0)" }} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.8 }}
+           viewport={{ once: true, amount: 0.1 }}
+           transition={{ duration: 0.7 }}
            className="text-center mb-20"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 mb-6">
@@ -38,8 +38,8 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.5 }}
             className="p-10 rounded-3xl bg-slate-900/40 border border-slate-800 relative overflow-hidden group"
           >
             <div className="hidden md:block absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[50px] group-hover:bg-blue-500/20 transition-colors" />
@@ -54,8 +54,8 @@ export function AboutSection() {
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
               className="p-10 rounded-3xl bg-slate-900/40 border border-slate-800 relative overflow-hidden group flex flex-col justify-center"
             >
               <div className="hidden md:block absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-[50px] group-hover:bg-cyan-500/20 transition-colors" />
@@ -81,8 +81,8 @@ export function AboutSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.7 }}
           className="mt-32"
         >
           <h3 className="text-3xl font-bold text-white mb-12 text-center">Core Principles</h3>
@@ -107,8 +107,8 @@ export function AboutSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.7 }}
           className="mt-32 pb-16"
         >
           <div className="p-12 rounded-3xl bg-gradient-to-br from-slate-900/80 to-black border border-slate-800 relative overflow-hidden">
